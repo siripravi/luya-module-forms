@@ -142,13 +142,13 @@ class Forms extends \luya\forms\Forms
             return true;
         }
       
-      /*  if (!Yii::$app->request->isPost && $this->model && method_exists($this->model, 'getBeforeLoadModelEvent')) {   
+        if (!Yii::$app->request->isPost && $this->model && method_exists($this->model, 'getBeforeLoadModelEvent')) {   
                  
             $event = $this->model->getBeforeLoadModelEvent($this->model);
             $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);
             Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
             
-        }*/
+        }
 
         if (!Yii::$app->request->isPost || !$this->model) {
             return false;

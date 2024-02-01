@@ -19,14 +19,69 @@ class FormBlock extends \luya\forms\blocks\FormBlock
 {
     public $module = "forms";
 
-    public function getViewPath()
+     /**
+     * @inheritDoc
+     */
+    public function config()
+    {
+        return [
+            'vars' => [
+                [
+                    'var' => 'formId',
+                    'label' => Yii::t('forms', 'Form'),
+                  //  'type' => self::TYPE_SELECT_CRUD,
+                  'type' => self::TYPE_CHECKBOX,
+                    'required' => true,
+                    'value' => 1
+                  //  'options' => ['route' => 'forms/form/index', 'api' => 'admin/api-forms-form', 'fields' => ['title']]
+                ],
+                [
+                    'var' => 'confirmStep',
+                    'label' => Yii::t('forms', 'Confirmation Step'),
+                    'type' => self::TYPE_CHECKBOX,
+                    'value' => 1
+                ],
+            ],
+            'cfgs' => [
+                [
+                    'var' => 'doNotSaveData',
+                    'label' => Yii::t('forms', 'Do not save data'),
+                    'type' => self::TYPE_CHECKBOX,
+                    'value' => 1
+                ],
+            //    ['var' => 'submitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_submitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
+            //    ['var' => 'previewSubmitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewSubmitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
+           //     ['var' => 'previewBackButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewBackButtonLabel'), 'placeholder' => Yii::t('forms', 'Back')],
+            //    ['var' => 'previewButtonsTemplate', 'type' => self::TYPE_TEXTAREA, 'label' => Yii::t('forms', 'form_label_previewButtonsTemplate'), 'placeholder' => $this->previewButtonsTemplate],
+            ],
+            'placeholders' => [
+                ['var' => 'content', 'label' => Yii::t('forms', 'Form')],
+                ['var' => 'preview', 'label' => Yii::t('forms', 'Preview')],
+                ['var' => 'success', 'label' => Yii::t('forms', 'Success')],
+            ],
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function extraVars()
+    {
+        return [
+            'isSubmit' => $this->isSubmit(),
+            'invokeSubmitAndStore' => $this->submitAndStore(),
+            'isPreview' => $this->getVarValue('confirmStep') && $this->isLoadedValidModel(),
+        ];
+    }
+
+  /*  public function getViewPath()
 {
     //if (empty($this->module)) {
         $class = new ReflectionClass($this);
         return dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'views';
    // }
    // return $this->ensureModule() . '/views/blocks';
-}
+}*/
     public function name()
     {
         return 'My Forms';

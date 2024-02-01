@@ -47,6 +47,7 @@ echo "GRGFGF";
         
     <?php endif; ?>
 <?php endif; ?>
+<?= $this->varValue('formId');?>
 
 <?php if ((!(get_class(Yii::$app->forms->model) == "Model")) && Yii::$app->forms->model->isPjax) : ?>
     <?= get_class(Yii::$app->forms->model); ?>
