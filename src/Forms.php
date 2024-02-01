@@ -1,5 +1,7 @@
 <?php
+
 namespace siripravi\forms;
+
 use luya\helpers\ArrayHelper;
 
 use Yii;
@@ -119,7 +121,7 @@ class Forms extends \luya\forms\Forms
     /**
      * Clean up the session and destroy model and form
      */
-  /*  public function cleanup()
+    /*  public function cleanup()
     {
         Yii::$app->session->remove($this->sessionFormDataName);
         $this->_model = null;
@@ -146,7 +148,6 @@ class Forms extends \luya\forms\Forms
             $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);
             $this->setAttributeValue('Features', $this->model->Features);
             Yii::$app->session->set("__" . $modelClass, $this->model->attributes);
-            // echo "LOADER"; die;
         }
 
         if (!Yii::$app->request->isPost || !$this->model) {
@@ -177,5 +178,5 @@ class Forms extends \luya\forms\Forms
         $modelClass = basename(get_class($this->model));
         $this->sessionFormDataName = "__" . $modelClass;
         return ArrayHelper::typeCast(Yii::$app->session->get($this->sessionFormDataName, []));
-    }   
+    }
 }
