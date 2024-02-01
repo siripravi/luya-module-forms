@@ -1,0 +1,34 @@
+{
+  "name": "siripravi/luya-module-forms",
+  "description": "Luya Extended module for Forms",
+  "type": "luya-module",
+  "keywords": [
+    "luya"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "purnachandra",
+      "email": "provdigi@gmail.com"
+    }
+  ],
+  "require": {
+   
+  },
+  "autoload": {
+    "psr-4": {
+      "siripravi\\forms\\": "src/"
+    }
+  },
+  "config": {
+    "fxp-asset": {
+      "enabled": false
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
+}
