@@ -64,6 +64,7 @@ class FormBlock extends \luya\forms\blocks\FormBlock
      */
     public function submitAndStore()
     {
+        
         if ($this->isSubmit()) { 
             // the data is only available if the isSubmit call was running, therefore for
             // first check for is submit

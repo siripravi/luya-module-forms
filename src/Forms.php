@@ -146,7 +146,7 @@ class Forms extends \luya\forms\Forms
             Yii::debug('before Model Load..' . $this->sessionFormDataName, __METHOD__);
             $event = $this->model->getBeforeLoadModelEvent($this->model);
             $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);
-            $this->setAttributeValue('Features', $this->model->Features);
+           // $this->setAttributeValue('Features', $this->model->Features);
             Yii::$app->session->set("__" . $modelClass, $this->model->attributes);
         }
 
