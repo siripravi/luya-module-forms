@@ -24,6 +24,7 @@ echo Html::button('<span class="glyphicon glyphicon-plus"></span>', [
     'class' => 'btn btn-success',
 ]);
 AjaxCreate::end();*/
+echo "GRGFGF";
 ?>
 <?php if (Yii::$app->session->getFlash('formDataSuccess')) : ?>
     <?= $this->placeholderValue('success'); ?>

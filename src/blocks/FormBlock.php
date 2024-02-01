@@ -17,7 +17,16 @@ use luya\forms\models\Form;
  */
 class FormBlock extends \luya\forms\blocks\FormBlock
 {
-    public $module = "@app";
+    public $module = "forms";
+
+    public function getViewPath()
+{
+    //if (empty($this->module)) {
+        $class = new ReflectionClass($this);
+        return dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'views';
+   // }
+   // return $this->ensureModule() . '/views/blocks';
+}
     public function name()
     {
         return 'My Forms';
@@ -63,7 +72,7 @@ class FormBlock extends \luya\forms\blocks\FormBlock
      * @return void
      */
     public function submitAndStore()
-    {
+    {       
         
         if ($this->isSubmit()) { 
             // the data is only available if the isSubmit call was running, therefore for
@@ -93,4 +102,5 @@ class FormBlock extends \luya\forms\blocks\FormBlock
             }
         }
     }
+
 }

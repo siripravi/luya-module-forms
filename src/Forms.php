@@ -137,32 +137,33 @@ class Forms extends \luya\forms\Forms
      */
     public function loadModel()
     {
-        $modelClass = basename(get_class($this->model));
+       
         if ($this->isModelValidated) {
             return true;
         }
-        /**TRIGGER BEFORE LOAD & VALIDATE EVENT : Chandra:1/11 **/
-        if (method_exists($this->model, 'getBeforeLoadModelEvent')) {
-            Yii::debug('before Model Load..' . $this->sessionFormDataName, __METHOD__);
+      
+      /*  if (!Yii::$app->request->isPost && $this->model && method_exists($this->model, 'getBeforeLoadModelEvent')) {   
+                 
             $event = $this->model->getBeforeLoadModelEvent($this->model);
             $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);
-           // $this->setAttributeValue('Features', $this->model->Features);
-            Yii::$app->session->set("__" . $modelClass, $this->model->attributes);
-        }
+            Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
+            
+        }*/
 
         if (!Yii::$app->request->isPost || !$this->model) {
             return false;
         }
         $this->isModelLoaded = $this->model->load(Yii::$app->request->post());
         if ($this->isModelLoaded && $this->model->validate()) {
-            Yii::$app->session->set("__" . $modelClass, $this->model->attributes);
-            Yii::debug('successfull loaded and validated order form', __METHOD__);
+           
+            Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
+           
             $this->isModelValidated = true;
-            /**TRIGGER AFTER LOAD & VALIDATE EVENT : Chandra:1/9 **/
+           
             if (method_exists($this->model, 'getAfterSaveEvent')) {
                 $event = $this->model->getAfterSaveEvent($this->model);
                 $this->model->trigger(get_class($this->model)::EVENT_AFTER_VALID, $event);
-            }
+            }           
             return true;
         }
         return false;
