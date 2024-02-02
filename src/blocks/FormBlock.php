@@ -19,7 +19,7 @@ class FormBlock extends \luya\forms\blocks\FormBlock
 {
     public $module = "forms";
 
-     /**
+    /**
      * @inheritDoc
      */
     public function config()
@@ -29,11 +29,11 @@ class FormBlock extends \luya\forms\blocks\FormBlock
                 [
                     'var' => 'formId',
                     'label' => Yii::t('forms', 'Form'),
-                  //  'type' => self::TYPE_SELECT_CRUD,
-                  'type' => self::TYPE_CHECKBOX,
+                    //  'type' => self::TYPE_SELECT_CRUD,
+                    'type' => self::TYPE_CHECKBOX,
                     'required' => true,
                     'value' => 1
-                  //  'options' => ['route' => 'forms/form/index', 'api' => 'admin/api-forms-form', 'fields' => ['title']]
+                    //  'options' => ['route' => 'forms/form/index', 'api' => 'admin/api-forms-form', 'fields' => ['title']]
                 ],
                 [
                     'var' => 'confirmStep',
@@ -49,10 +49,10 @@ class FormBlock extends \luya\forms\blocks\FormBlock
                     'type' => self::TYPE_CHECKBOX,
                     'value' => 1
                 ],
-            //    ['var' => 'submitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_submitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
-            //    ['var' => 'previewSubmitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewSubmitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
-           //     ['var' => 'previewBackButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewBackButtonLabel'), 'placeholder' => Yii::t('forms', 'Back')],
-            //    ['var' => 'previewButtonsTemplate', 'type' => self::TYPE_TEXTAREA, 'label' => Yii::t('forms', 'form_label_previewButtonsTemplate'), 'placeholder' => $this->previewButtonsTemplate],
+                //    ['var' => 'submitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_submitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
+                //    ['var' => 'previewSubmitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewSubmitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
+                //     ['var' => 'previewBackButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewBackButtonLabel'), 'placeholder' => Yii::t('forms', 'Back')],
+                //    ['var' => 'previewButtonsTemplate', 'type' => self::TYPE_TEXTAREA, 'label' => Yii::t('forms', 'form_label_previewButtonsTemplate'), 'placeholder' => $this->previewButtonsTemplate],
             ],
             'placeholders' => [
                 ['var' => 'content', 'label' => Yii::t('forms', 'Form')],
@@ -81,24 +81,17 @@ class FormBlock extends \luya\forms\blocks\FormBlock
      */
     public function isSubmit()
     {
-       
+
         // when confirmm step is disabled, but review is loaded, this is equals to a submit:
         if (!$this->getVarValue('confirmStep') && $this->isLoadedValidModel()) {
-            return true;        }
+            return true;
+        }
 
         $isSubmit = Yii::$app->request->get('submit', false);
-        Yii::debug('Fom submitting Finally...'.$isSubmit.'=='.$this->getVarValue('formId'));
+        Yii::debug('Fom submitting Finally...' . $isSubmit . '==' . $this->getVarValue('formId'));
         return $isSubmit && $isSubmit == $this->getVarValue('formId');
     }
 
-  /*  public function getViewPath()
-{
-    //if (empty($this->module)) {
-        $class = new ReflectionClass($this);
-        return dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'views';
-   // }
-   // return $this->ensureModule() . '/views/blocks';
-}*/
     public function name()
     {
         return 'My Forms';
@@ -144,40 +137,26 @@ class FormBlock extends \luya\forms\blocks\FormBlock
      * @return void
      */
     public function submitAndStore()
-    {       
-        
-        if ($this->isSubmit()) { 
-            // the data is only available if the isSubmit call was running, therefore for
-            // first check for is submit
-            // second get data from session
+    {
+        if ($this->isSubmit()) {           
             $data = Yii::$app->forms->getFormData();
-                    
+            Yii::trace('Session Form: ' . print_r($data, true));
             if (!empty($data)) {
                 $model = Yii::$app->forms->model;
-                $model->setAttributes($data);
-                // invisible attributes should not be validate in the second validation step.
                 if (Yii::$app->forms->isModelValidated || $model->validate($model->getAttributesWithoutInvisible())) {
-                    /*  if (!Yii::$app->forms->save(Form::findOne($this->getVarValue('formId')), $this->getCfgValue('doNotSaveData', false))) {
-                        throw new Exception("Error while saving the form data, please try again later.");
-                    }*/
-                    /*   if (method_exists(get_class($model), 'getAfterSaveEvent')) {
-                        $event = $model->getAfterSaveEvent($model);
-                        $model->trigger(get_class($model)::EVENT_AFTER_SAVE, $event);
-                    } */
-                 //   echo "<pre>";print_r($data); die;
+
                     if (method_exists(get_class($model), 'getAfterSaveEvent')) {
                         $event = $model->getAfterSaveEvent($model);
                         $model->trigger(get_class($model)::EVENT_AFTER_VALID, $event);
                     }
                     Yii::$app->forms->cleanup();
-                    // set flash, redirect and end app
+                   
                     Yii::$app->session->setFlash('formDataSuccess');
                     Yii::$app->response->redirect($model->redirectUrl);
-                    // Yii::$app->response->redirect('/shopping-cart');
+
                     return Yii::$app->end();
                 }
             }
         }
     }
-
 }

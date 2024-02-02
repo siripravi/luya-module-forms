@@ -121,14 +121,14 @@ class Forms extends \luya\forms\Forms
     /**
      * Clean up the session and destroy model and form
      */
-    /*  public function cleanup()
+    public function cleanup()
     {
         Yii::$app->session->remove($this->sessionFormDataName);
         $this->_model = null;
         $this->_form = null;
         $this->isModelValidated = false;
         $this->isModelLoaded = false;
-    }*/
+    }
 
     /**
      * Loads the data from the post request into the model, validates it and stores the data in the session.
@@ -137,35 +137,31 @@ class Forms extends \luya\forms\Forms
      */
     public function loadModel()
     {
-
         if ($this->isModelValidated) {
             return true;
         }
 
-        if (!Yii::$app->request->isPost && $this->model && method_exists($this->model, 'getBeforeLoadModelEvent')) {
-
+        if (!Yii::$app->request->isPost  && method_exists($this->model, 'getBeforeLoadModelEvent')) {
             $event = $this->model->getBeforeLoadModelEvent($this->model);
-            $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);
-            // Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
-
+            $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);          
         }
 
         if (!Yii::$app->request->isPost || !$this->model) {
             return false;
         }
-        Yii::info('Before loading: ' . print_r($this->model->attributes, true));
-        $postData = Yii::$app->request->post();       
-        $this->isModelLoaded = $this->model->load($postData);
-       Yii::info('After loading: ' . print_r($this->model->attributes, true));
-        if ($this->isModelLoaded && $this->model->validate()) {
-            Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
-           
-            $this->isModelValidated = true;
 
-          /*  if (method_exists($this->model, 'getAfterSaveEvent')) {
-                $event = $this->model->getAfterSaveEvent($this->model);
-                $this->model->trigger(get_class($this->model)::EVENT_AFTER_VALID, $event);
-            }*/
+        $postData = Yii::$app->request->post();  
+       /* $modelClass = basename(get_class($this->model));
+        $this->sessionFormDataName = "__" . $modelClass;*/
+        Yii::trace("FORM SUBMIT:".print_r($postData,true));
+        $postKeys = array_keys($postData[basename(get_class($this->model))]);
+       // Yii::$app->session->set($this->sessionFormDataName, $this->model->getAttributes($postKeys));
+        $this->isModelLoaded = $this->model->load($postData);
+        Yii::$app->session->set($this->sessionFormDataName, $this->model->getAttributes($postKeys));
+       // Yii::info('SESSION: ' . print_r($this->model->attributes, true));
+        if ($this->isModelLoaded && $this->model->validate()) {
+       
+            $this->isModelValidated = true;
             return true;
         }
         return false;
