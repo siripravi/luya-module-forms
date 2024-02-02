@@ -7,14 +7,15 @@ class Module extends \luya\forms\Module{
      /**
      * {@inheritDoc}
      */
-  /*  public function getMenu()
-    {
-        return (new \luya\admin\components\AdminMenuBuilder($this))
+    public function getMenu()
+    { return true;
+        /*return (new \luya\admin\components\AdminMenuBuilder($this))
             ->node('Forms', 'dynamic_form')
                 ->group('Setup')
-                    ->itemApi('Form', 'luyaforms/form/index', 'dynamic_form', 'api-forms-form')
+                    ->itemApi('Form', 'forms/form/index', 'dynamic_form', 'api-forms-form')
                 ->group('Data')
-                    ->itemApi('Submission', 'luyaforms/submission/index', 'send', 'api-forms-submission')
-                    ->itemApi('Values', 'luyaforms/submission-value/index', 'label', 'api-forms-submissionvalue', ['hiddenInMenu' => true]);
-    }*/
+                    ->itemApi('Submission', 'forms/submission/index', 'send', 'api-forms-submission')
+                    ->itemApi('Values', 'forms/submission-value/index', 'label', 'api-forms-submissionvalue', ['hiddenInMenu' => true]);
+                    */
+    }
 }
