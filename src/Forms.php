@@ -137,33 +137,35 @@ class Forms extends \luya\forms\Forms
      */
     public function loadModel()
     {
-       
+
         if ($this->isModelValidated) {
             return true;
         }
-      
-        if (!Yii::$app->request->isPost && $this->model && method_exists($this->model, 'getBeforeLoadModelEvent')) {   
-                 
+
+        if (!Yii::$app->request->isPost && $this->model && method_exists($this->model, 'getBeforeLoadModelEvent')) {
+
             $event = $this->model->getBeforeLoadModelEvent($this->model);
             $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);
-            Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
-            
+            // Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
+
         }
 
         if (!Yii::$app->request->isPost || !$this->model) {
             return false;
         }
-        $this->isModelLoaded = $this->model->load(Yii::$app->request->post());
+        Yii::info('Before loading: ' . print_r($this->model->attributes, true));
+        $postData = Yii::$app->request->post();       
+        $this->isModelLoaded = $this->model->load($postData);
+       Yii::info('After loading: ' . print_r($this->model->attributes, true));
         if ($this->isModelLoaded && $this->model->validate()) {
-           
             Yii::$app->session->set("__" . basename(get_class($this->model)), $this->model->attributes);
            
             $this->isModelValidated = true;
-           
-            if (method_exists($this->model, 'getAfterSaveEvent')) {
+
+          /*  if (method_exists($this->model, 'getAfterSaveEvent')) {
                 $event = $this->model->getAfterSaveEvent($this->model);
                 $this->model->trigger(get_class($this->model)::EVENT_AFTER_VALID, $event);
-            }           
+            }*/
             return true;
         }
         return false;

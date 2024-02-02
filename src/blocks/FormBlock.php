@@ -74,6 +74,23 @@ class FormBlock extends \luya\forms\blocks\FormBlock
         ];
     }
 
+    /**
+     * Check submit state based on different scenarios
+     *
+     * @return boolean Whether the form is in submited state or not
+     */
+    public function isSubmit()
+    {
+       
+        // when confirmm step is disabled, but review is loaded, this is equals to a submit:
+        if (!$this->getVarValue('confirmStep') && $this->isLoadedValidModel()) {
+            return true;        }
+
+        $isSubmit = Yii::$app->request->get('submit', false);
+        Yii::debug('Fom submitting Finally...'.$isSubmit.'=='.$this->getVarValue('formId'));
+        return $isSubmit && $isSubmit == $this->getVarValue('formId');
+    }
+
   /*  public function getViewPath()
 {
     //if (empty($this->module)) {
@@ -134,19 +151,24 @@ class FormBlock extends \luya\forms\blocks\FormBlock
             // first check for is submit
             // second get data from session
             $data = Yii::$app->forms->getFormData();
-
+                    
             if (!empty($data)) {
                 $model = Yii::$app->forms->model;
-                $model->attributes = $data;
+                $model->setAttributes($data);
                 // invisible attributes should not be validate in the second validation step.
                 if (Yii::$app->forms->isModelValidated || $model->validate($model->getAttributesWithoutInvisible())) {
                     /*  if (!Yii::$app->forms->save(Form::findOne($this->getVarValue('formId')), $this->getCfgValue('doNotSaveData', false))) {
                         throw new Exception("Error while saving the form data, please try again later.");
                     }*/
-                    /*    if (method_exists(get_class($model), 'getAfterSaveEvent')) {
+                    /*   if (method_exists(get_class($model), 'getAfterSaveEvent')) {
                         $event = $model->getAfterSaveEvent($model);
                         $model->trigger(get_class($model)::EVENT_AFTER_SAVE, $event);
-                    }  */
+                    } */
+                 //   echo "<pre>";print_r($data); die;
+                    if (method_exists(get_class($model), 'getAfterSaveEvent')) {
+                        $event = $model->getAfterSaveEvent($model);
+                        $model->trigger(get_class($model)::EVENT_AFTER_VALID, $event);
+                    }
                     Yii::$app->forms->cleanup();
                     // set flash, redirect and end app
                     Yii::$app->session->setFlash('formDataSuccess');
