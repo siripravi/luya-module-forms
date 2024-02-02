@@ -2,7 +2,7 @@
 
 namespace siripravi\forms;
 
-class Module extends \luya\forms\Module{
+class Module extends \luya\admin\base\Module{
 
      /**
      * {@inheritDoc}
