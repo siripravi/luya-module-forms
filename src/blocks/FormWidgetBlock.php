@@ -51,7 +51,7 @@ class FormWidgetBlock extends PhpBlock
                        
                         [   
                             'var' => 'fld_type', 
-                            'label' => Yii::t('forms', 'Type'),
+                            'label' => Yii::t('app', 'Type'),
                             'type' => self::TYPE_RADIO,
                             'options' => BlockHelper::radioArrayOption([
                                 $this-> getInputTypes()
@@ -69,9 +69,9 @@ class FormWidgetBlock extends PhpBlock
                ],
                 ],
             'placeholders' => [
-                ['var' => 'wgtcontent', 'label' => Yii::t('forms', 'Form')],
-               // ['var' => 'preview', 'label' => Yii::t('forms', 'Preview')],
-              //  ['var' => 'success', 'label' => Yii::t('forms', 'Success')],
+                ['var' => 'wgtcontent', 'label' => Yii::t('app', 'Form')],
+               // ['var' => 'preview', 'label' => Yii::t('app', 'Preview')],
+              //  ['var' => 'success', 'label' => Yii::t('app', 'Success')],
             ],
         ];
     }
@@ -93,7 +93,7 @@ class FormWidgetBlock extends PhpBlock
      */
     public function name()
     {
-        return Yii::t('forms', 'Text');
+        return Yii::t('app', 'Text');
     }
 
     /**
@@ -111,11 +111,11 @@ class FormWidgetBlock extends PhpBlock
     {
         return ArrayHelper::merge($this->parentConfig(), [
             'vars' => [
-                ['var' => 'isTextarea', 'label' => Yii::t('forms', 'Multiline Input'), 'type' => self::TYPE_CHECKBOX],
+                ['var' => 'isTextarea', 'label' => Yii::t('app', 'Multiline Input'), 'type' => self::TYPE_CHECKBOX],
             ],
             'cfgs' => [
-                ['var' => 'textareaRows', 'label' => Yii::t('forms', 'Multiline Rows'), 'type' => self::TYPE_NUMBER],
-                ['var' => 'hiddenInputValue', 'label' => Yii::t('forms', 'As Hidden Input Value'), 'type' => self::TYPE_TEXT],
+                ['var' => 'textareaRows', 'label' => Yii::t('app', 'Multiline Rows'), 'type' => self::TYPE_NUMBER],
+                ['var' => 'hiddenInputValue', 'label' => Yii::t('app', 'As Hidden Input Value'), 'type' => self::TYPE_TEXT],
             ]
         ]);
     }*/
@@ -123,7 +123,7 @@ class FormWidgetBlock extends PhpBlock
     /*  public function getFieldHelp()
     {
         return [
-            'hiddenInputValue' => Yii::t('forms', 'block_hiddenInputValue_help'),
+            'hiddenInputValue' => Yii::t('app', 'block_hiddenInputValue_help'),
         ];
     }*/
 
@@ -136,7 +136,7 @@ class FormWidgetBlock extends PhpBlock
      */
     public function admin()
     {
-        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">' . Yii::t('forms', 'Form Widget') . '</span></div>';
+        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">' . Yii::t('app', 'Form Widget') . '</span></div>';
     }
     /**
      * {@inheritDoc}

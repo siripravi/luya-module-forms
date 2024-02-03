@@ -28,10 +28,11 @@ class RadioListBlock extends PhpBlock
 
     public $radListData = [];
 
-    public function init()
+    public function setup()
     {
         // Yii::$app->forms->model->
-
+      
+        Yii::trace("RADIO LIST INIT DATA");
         $this->radListData = [
             1 =>[
             1 => 'One', 2 => 'Two', 3 => 'Three'
@@ -63,31 +64,7 @@ class RadioListBlock extends PhpBlock
         return 'list';
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function config()
-    {
-        $config = $this->parentConfig();
-        // remove validator
-        unset($config['vars'][4]);
-        return ArrayHelper::merge($config, [
-            'cfgs' => [
-                ['var' => 'disablePolyfill', 'label' => Yii::t('forms', 'Disable Polyfill'), 'type' => self::TYPE_CHECKBOX],
-            ]
-        ]);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getFieldHelp()
-    {
-        return [
-            'disablePolyfill' => Yii::t('forms', 'When enabled, the polyfill which ensures the datepicker works on Safari and Internet Explorer is disabled.'),
-        ];
-    }
-
+   
     /**
      * {@inheritDoc}
      *
@@ -102,7 +79,7 @@ class RadioListBlock extends PhpBlock
 
     public function frontend()
     {
-           print_r($this->radListData); die;
+           //print_r($this->radListData); die;
         \Yii::$app->forms->autoConfigureAttribute(
             $this->getVarValue($this->varAttribute),
             $this->getVarValue($this->varRule, $this->defaultRule),
@@ -115,13 +92,18 @@ class RadioListBlock extends PhpBlock
         if (!$varName) {
             return;
         }
-
+        $this->radListData = [
+            1 =>[
+            1 => 'One', 2 => 'Two', 3 => 'Three'
+            ]
+        ];
         $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName);
 
-        // $values = ArrayHelper::combine(ArrayHelper::getColumn($this->getVarValue('values', []), 'value'));
+         $values = ArrayHelper::combine(ArrayHelper::getColumn($this->getVarValue('values', []), 'value'));
         $output = "";
 
         foreach ($this->radListData as $id => $feature) {
+            $values = $feature;
             $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName . '[' . $id . ']');
             $output .= $this->getVarValue('type') == 1 ? $activeField->dropDownList($values, ['prompt' => '-']) : $activeField->radioList($values, [
                 'separator' => $this->getCfgValue('separator', "\n")

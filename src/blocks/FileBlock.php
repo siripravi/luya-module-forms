@@ -31,7 +31,7 @@ class FileBlock extends PhpBlock
      */
     public function name()
     {
-        return Yii::t('forms', 'File');
+        return Yii::t('app', 'File');
     }
     
     /**
@@ -62,7 +62,7 @@ class FileBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('forms', 'File').'</span></div>';
+        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('app', 'File').'</span></div>';
     }
 
     public function frontend()

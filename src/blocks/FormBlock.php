@@ -28,7 +28,7 @@ class FormBlock extends PhpBlock
             'vars' => [
                 [
                     'var' => 'formId',
-                    'label' => Yii::t('forms', 'Form'),
+                    'label' => Yii::t('app', 'Form'),
                     //  'type' => self::TYPE_SELECT_CRUD,
                     'type' => self::TYPE_CHECKBOX,
                     'required' => true,
@@ -37,7 +37,7 @@ class FormBlock extends PhpBlock
                 ],
                 [
                     'var' => 'confirmStep',
-                    'label' => Yii::t('forms', 'Confirmation Step'),
+                    'label' => Yii::t('app', 'Confirmation Step'),
                     'type' => self::TYPE_CHECKBOX,
                     'value' => 1
                 ],
@@ -45,19 +45,19 @@ class FormBlock extends PhpBlock
             'cfgs' => [
                 [
                     'var' => 'doNotSaveData',
-                    'label' => Yii::t('forms', 'Do not save data'),
+                    'label' => Yii::t('app', 'Do not save data'),
                     'type' => self::TYPE_CHECKBOX,
                     'value' => 1
                 ],
-                //    ['var' => 'submitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_submitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
-                //    ['var' => 'previewSubmitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewSubmitButtonLabel'), 'placeholder' => Yii::t('forms', 'Submit')],
-                //     ['var' => 'previewBackButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('forms', 'form_label_previewBackButtonLabel'), 'placeholder' => Yii::t('forms', 'Back')],
-                //    ['var' => 'previewButtonsTemplate', 'type' => self::TYPE_TEXTAREA, 'label' => Yii::t('forms', 'form_label_previewButtonsTemplate'), 'placeholder' => $this->previewButtonsTemplate],
+                //    ['var' => 'submitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('app', 'form_label_submitButtonLabel'), 'placeholder' => Yii::t('app', 'Submit')],
+                //    ['var' => 'previewSubmitButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('app', 'form_label_previewSubmitButtonLabel'), 'placeholder' => Yii::t('app', 'Submit')],
+                //     ['var' => 'previewBackButtonLabel', 'type' => self::TYPE_TEXT, 'label' => Yii::t('app', 'form_label_previewBackButtonLabel'), 'placeholder' => Yii::t('app', 'Back')],
+                //    ['var' => 'previewButtonsTemplate', 'type' => self::TYPE_TEXTAREA, 'label' => Yii::t('app', 'form_label_previewButtonsTemplate'), 'placeholder' => $this->previewButtonsTemplate],
             ],
             'placeholders' => [
-                ['var' => 'content', 'label' => Yii::t('forms', 'Form')],
-                ['var' => 'preview', 'label' => Yii::t('forms', 'Preview')],
-                ['var' => 'success', 'label' => Yii::t('forms', 'Success')],
+                ['var' => 'content', 'label' => Yii::t('app', 'Form')],
+                ['var' => 'preview', 'label' => Yii::t('app', 'Preview')],
+                ['var' => 'success', 'label' => Yii::t('app', 'Success')],
             ],
         ];
     }

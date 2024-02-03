@@ -31,7 +31,7 @@ class TextBlock extends PhpBlock
      */
     public function name()
     {
-        return Yii::t('forms', 'Text');
+        return Yii::t('app', 'Text');
     }
     
     /**
@@ -49,11 +49,11 @@ class TextBlock extends PhpBlock
     {
         return ArrayHelper::merge($this->parentConfig(), [
             'vars' => [
-                ['var' => 'isTextarea', 'label' => Yii::t('forms', 'Multiline Input'), 'type' => self::TYPE_CHECKBOX],
+                ['var' => 'isTextarea', 'label' => Yii::t('app', 'Multiline Input'), 'type' => self::TYPE_CHECKBOX],
             ],
             'cfgs' => [
-                ['var' => 'textareaRows', 'label' => Yii::t('forms', 'Multiline Rows'), 'type' => self::TYPE_NUMBER],
-                ['var' => 'hiddenInputValue', 'label' => Yii::t('forms', 'As Hidden Input Value'), 'type' => self::TYPE_TEXT],
+                ['var' => 'textareaRows', 'label' => Yii::t('app', 'Multiline Rows'), 'type' => self::TYPE_NUMBER],
+                ['var' => 'hiddenInputValue', 'label' => Yii::t('app', 'As Hidden Input Value'), 'type' => self::TYPE_TEXT],
             ]
         ]);
     }
@@ -61,7 +61,7 @@ class TextBlock extends PhpBlock
     public function getFieldHelp()
     {
         return [
-            'hiddenInputValue' => Yii::t('forms', 'block_hiddenInputValue_help'),
+            'hiddenInputValue' => Yii::t('app', 'block_hiddenInputValue_help'),
         ];
     }
     
@@ -74,7 +74,7 @@ class TextBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('forms', 'Text').'</span></div>';
+        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('app', 'Text').'</span></div>';
     }
 
     /**

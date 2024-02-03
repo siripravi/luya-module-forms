@@ -28,7 +28,7 @@ class SummaryBlock extends PhpBlock
     {
         return [
             'vars' => [
-                ['var' => 'template', 'label' => Yii::t('forms', 'Row Template'), 'type' => self::TYPE_TEXTAREA, 'placeholder' => $this->template],
+                ['var' => 'template', 'label' => Yii::t('app', 'Row Template'), 'type' => self::TYPE_TEXTAREA, 'placeholder' => $this->template],
             ]
         ];
     }
@@ -36,7 +36,7 @@ class SummaryBlock extends PhpBlock
     public function getFieldHelp()
     {
         return [
-            'template' => Yii::t('forms', 'The variables {{label}} and {{value}} are available.'),
+            'template' => Yii::t('app', 'The variables {{label}} and {{value}} are available.'),
         ];
     }
 
@@ -47,7 +47,7 @@ class SummaryBlock extends PhpBlock
 
     public function name()
     {
-        return Yii::t('forms', 'Summary');
+        return Yii::t('app', 'Summary');
     }
 
     /**

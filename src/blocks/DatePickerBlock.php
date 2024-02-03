@@ -60,7 +60,7 @@ class DatepickerBlock extends PhpBlock
         unset($config['vars'][4]);
         return ArrayHelper::merge($config, [
             'cfgs' => [
-                ['var' => 'disablePolyfill', 'label' => Yii::t('forms', 'Disable Polyfill'), 'type' => self::TYPE_CHECKBOX],
+                ['var' => 'disablePolyfill', 'label' => Yii::t('app', 'Disable Polyfill'), 'type' => self::TYPE_CHECKBOX],
             ]
         ]);
     }
@@ -71,7 +71,7 @@ class DatepickerBlock extends PhpBlock
     public function getFieldHelp()
     {
         return [
-            'disablePolyfill' => Yii::t('forms', 'When enabled, the polyfill which ensures the datepicker works on Safari and Internet Explorer is disabled.'),
+            'disablePolyfill' => Yii::t('app', 'When enabled, the polyfill which ensures the datepicker works on Safari and Internet Explorer is disabled.'),
         ];
     }
 

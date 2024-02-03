@@ -31,7 +31,7 @@ class CheckboxesBlock extends PhpBlock
      */
     public function name()
     {
-        return Yii::t('forms', 'Checkboxes');
+        return Yii::t('app', 'Checkboxes');
     }
     
     /**
@@ -48,7 +48,7 @@ class CheckboxesBlock extends PhpBlock
             'vars' => [
                 [
                     'var' => 'values',
-                    'label' => Yii::t('forms', 'Values'),
+                    'label' => Yii::t('app', 'Values'),
                     'type' => self::TYPE_LIST_ARRAY
                 ],
             ],
@@ -58,7 +58,7 @@ class CheckboxesBlock extends PhpBlock
     public function getFieldHelp()
     {
         return [
-            'values' => Yii::t('forms', 'checkboxes_values_help'),
+            'values' => Yii::t('app', 'checkboxes_values_help'),
         ];
     }
     
@@ -71,7 +71,7 @@ class CheckboxesBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('forms', 'Checkboxes').'</span></div>';
+        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('app', 'Checkboxes').'</span></div>';
     }
 
     public function frontend()

@@ -32,7 +32,7 @@ class SelectBlock extends PhpBlock
      */
     public function name()
     {
-        return Yii::t('forms', 'Dropdown/Radio Buttons');
+        return Yii::t('app', 'Dropdown/Radio Buttons');
     }
     
     /**
@@ -49,23 +49,23 @@ class SelectBlock extends PhpBlock
             'vars' => [
                 [
                     'var' => 'type',
-                    'label' => Yii::t('forms', 'Type'),
+                    'label' => Yii::t('app', 'Type'),
                     'type' => self::TYPE_RADIO,
                     'options' => BlockHelper::radioArrayOption([
-                        1 => Yii::t('forms', 'Dropdown'),
-                        2 => Yii::t('forms', 'Radio Buttons'),
+                        1 => Yii::t('app', 'Dropdown'),
+                        2 => Yii::t('app', 'Radio Buttons'),
                     ])
                 ],
                 [
                     'var' => 'values',
-                    'label' => Yii::t('forms', 'Values'),
+                    'label' => Yii::t('app', 'Values'),
                     'type' => self::TYPE_LIST_ARRAY
                 ]
             ],
             'cfgs' => [
                 [
                     'var' => 'separator',
-                    'label' => Yii::t('forms', 'Separator'),
+                    'label' => Yii::t('app', 'Separator'),
                     'type' => self::TYPE_TEXT,
                     'placeholder' => '\n',
 
@@ -80,7 +80,7 @@ class SelectBlock extends PhpBlock
     public function getFieldHelp()
     {
         return [
-            'separator' => Yii::t('forms', 'The HTML code that separates items. By default, it is a newline, use &nbsp; to separate items with spaces.')
+            'separator' => Yii::t('app', 'The HTML code that separates items. By default, it is a newline, use &nbsp; to separate items with spaces.')
         ];
     }
     
@@ -93,7 +93,7 @@ class SelectBlock extends PhpBlock
     */
     public function admin()
     {
-        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('forms', 'Dropdown/Radio Buttons').'</span></div>';
+        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">'.Yii::t('app', 'Dropdown/Radio Buttons').'</span></div>';
     }
 
     public function frontend()
