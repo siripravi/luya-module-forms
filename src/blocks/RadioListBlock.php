@@ -103,7 +103,8 @@ class RadioListBlock extends PhpBlock
         $output = "";
 
         foreach ($this->radListData as $id => $feature) {
-            $values = $feature;
+            $output .='<span>Hello-'.$id.'</spn>';
+           // $values = $feature;
             $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName . '[' . $id . ']');
             $output .= $this->getVarValue('type') == 1 ? $activeField->dropDownList($values, ['prompt' => '-']) : $activeField->radioList($values, [
                 'separator' => $this->getCfgValue('separator', "\n")
