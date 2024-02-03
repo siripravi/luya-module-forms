@@ -3,11 +3,11 @@
 namespace siripravi\forms\blocks;
 
 use Yii;
-
+use luya\cms\base\PhpBlock;
 use luya\Exception;
-use luya\forms\blockgroups\FormGroup;
-use luya\forms\Model;
-use luya\forms\models\Form;
+use siripravi\forms\blockgroups\FormGroup;
+use siripravi\forms\Model;
+use siripravi\forms\models\Form;
 
 /**
  * Form Block.
@@ -15,7 +15,7 @@ use luya\forms\models\Form;
  * @author Basil Suter <git@nadar.io>
  * @since 1.0.0
  */
-class FormBlock extends \luya\forms\blocks\FormBlock
+class FormBlock extends PhpBlock
 {
     public $module = "forms";
 
@@ -116,7 +116,7 @@ class FormBlock extends \luya\forms\blocks\FormBlock
         Yii::debug('from block setup invocation', __METHOD__);
         Yii::debug($this->getEnvOption('context', false));
         $object = Yii::$app->forms->activeFormClass;
-        $model = 'luya\forms\Model';
+        $model = 'siripravi\forms\Model';
 
         $begin = Yii::$app->forms->activeFormClassOptions;
         Yii::$app->forms->model = new $model();   //Yii::$app->forms->model->isPjax = false;
@@ -138,7 +138,7 @@ class FormBlock extends \luya\forms\blocks\FormBlock
      */
     public function submitAndStore()
     {
-        if ($this->isSubmit()) {           
+        if ($this->isSubmit()) {
             $data = Yii::$app->forms->getFormData();
             Yii::trace('Session Form: ' . print_r($data, true));
             if (!empty($data)) {
@@ -150,7 +150,7 @@ class FormBlock extends \luya\forms\blocks\FormBlock
                         $model->trigger(get_class($model)::EVENT_AFTER_VALID, $event);
                     }
                     Yii::$app->forms->cleanup();
-                   
+
                     Yii::$app->session->setFlash('formDataSuccess');
                     Yii::$app->response->redirect($model->redirectUrl);
 
@@ -158,5 +158,24 @@ class FormBlock extends \luya\forms\blocks\FormBlock
                 }
             }
         }
+    }
+ /**
+     * Load model data and validate
+     *
+     * @return boolean Whether the model data is loaded and validated
+     */
+    public function isLoadedValidModel()
+    {
+        return Yii::$app->forms->loadModel();
+    }
+    /**
+     * {@inheritDoc}
+     *
+     * @param {{placeholders.content}}
+     * @param {{vars.formId}}
+     */
+    public function admin()
+    {
+        return;
     }
 }

@@ -9,8 +9,8 @@ use Yii;
 //use yii\widgets\ActiveForm;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
-use luya\forms\Model;
-
+use siripravi\forms\Model;
+use yii\base\Component;
 
 /**
  * Forms Component
@@ -21,7 +21,7 @@ use luya\forms\Model;
  * @author Basil Suter <git@nadar.io>
  * @since 1.0.0
  */
-class Forms extends \luya\forms\Forms
+class Forms extends Component
 {
     const EVENT_AFTER_SAVE = 'afterSave';
     //const EVENT_AFTER_VALID = 'afterValidate';
@@ -77,7 +77,7 @@ class Forms extends \luya\forms\Forms
      */
     private $_model;
 
-    public function beginForm(ActiveForm $form, String $model = 'luya\forms\Model')
+    public function beginForm(ActiveForm $form, String $model = 'siripravi\forms\Model')
     {
         $this->_form = $form;
         $this->_model = new $model();

@@ -20,7 +20,7 @@ use yii\validators\DateValidator;
  * @author Basil Suter <git@nadar.io>
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
  */
-class DatepickerBlock extends PhpBlock
+class RadioListBlockBlock extends PhpBlock
 {
     use FieldBlockTrait {
         config as parentConfig;
@@ -39,7 +39,7 @@ class DatepickerBlock extends PhpBlock
      */
     public function name()
     {
-        return Yii::t('app', 'My Datepicker');
+        return Yii::t('app', 'Radio List');
     }
 
     /**
@@ -47,7 +47,7 @@ class DatepickerBlock extends PhpBlock
      */
     public function icon()
     {
-        return 'date_range';
+        return 'list';
     }
 
     /**
@@ -84,16 +84,12 @@ class DatepickerBlock extends PhpBlock
      */
     public function admin()
     {
-        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">' . Yii::t('app', 'My Datepicker') . '</span></div>';
+        return '<div>{{vars.label}} <span class="badge badge-secondary float-right">' . Yii::t('app', 'Radio List') . '</span></div>';
     }
 
     public function frontend()
     {
-        if (!$this->getCfgValue('disablePolyfill', false)) {
-            //  Yii::$app->view->registerJsFile('//cdn.jsdelivr.net/npm/better-dom@4.1.0/dist/better-dom.min.js');
-            //   Yii::$app->view->registerJsFile('//cdnjs.cloudflare.com/ajax/libs/better-dateinput-polyfill/3.3.1/better-dateinput-polyfill.min.js', [], 'nodep-date-input-polyfil');
-        }
-
+        
         Yii::$app->forms->autoConfigureAttribute(
             $this->getVarValue($this->varAttribute),
             $this->getVarValue($this->varRule, $this->defaultRule),
