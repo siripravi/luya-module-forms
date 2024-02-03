@@ -26,6 +26,7 @@ class Model extends DynamicModel
      */
     public $formatters = [];
 
+    public $Features = [];
     public $FeatureSel = [];
     public $price = 0; 
     public $Price = 0;

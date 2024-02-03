@@ -150,7 +150,8 @@ class Forms extends Component
             return true;
         }
 
-        if (!Yii::$app->request->isPost  && method_exists($this->model, 'getBeforeLoadModelEvent')) {
+        if (!Yii::$app->request->isPost  && $this->model && method_exists($this->model, 'getBeforeLoadModelEvent')) {
+            Yii::trace('Before LoadModel');
             $event = $this->model->getBeforeLoadModelEvent($this->model);
             $this->model->trigger(get_class($this->model)::EVENT_BEFORE_LOAD, $event);          
         }

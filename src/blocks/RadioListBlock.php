@@ -31,13 +31,23 @@ class RadioListBlock extends PhpBlock
     public function setup()
     {
         // Yii::$app->forms->model->
-      
+
         Yii::trace("RADIO LIST INIT DATA");
-        $this->radListData = [
+        Yii::$app->forms->loadModel();
+        $model = Yii::$app->forms->model;
+        if($model){
+        $this->radListData = $model->Features;
+        //ArrayHelper::getColumn($model->Features, 'rList');
+       // $names =  ArrayHelper::getColumn($model->Features, 'name'); 
+
+        }
+        /* [
             1 =>[
             1 => 'One', 2 => 'Two', 3 => 'Three'
             ]
-        ];
+        ];*/
+        //   Yii::trace("Features:".print_r($this->radListData),true);
+       // echo "<pre>";print_r($names); die;
     }
 
     /**
@@ -64,7 +74,7 @@ class RadioListBlock extends PhpBlock
         return 'list';
     }
 
-   
+
     /**
      * {@inheritDoc}
      *
@@ -79,7 +89,13 @@ class RadioListBlock extends PhpBlock
 
     public function frontend()
     {
-           //print_r($this->radListData); die;
+        Yii::$app->forms->loadModel();
+        $model = Yii::$app->forms->model;
+        if($model){
+        $this->radListData = $model->Features;
+       
+        }
+        //print_r($this->radListData); die;
         \Yii::$app->forms->autoConfigureAttribute(
             $this->getVarValue($this->varAttribute),
             $this->getVarValue($this->varRule, $this->defaultRule),
@@ -92,23 +108,18 @@ class RadioListBlock extends PhpBlock
         if (!$varName) {
             return;
         }
-        $this->radListData = [
-            1 =>[
-            1 => 'One', 2 => 'Two', 3 => 'Three'
-            ]
-        ];
+       
         $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName);
 
-         $values = ArrayHelper::combine(ArrayHelper::getColumn($this->getVarValue('values', []), 'value'));
+        $values = ArrayHelper::combine(ArrayHelper::getColumn($this->getVarValue('values', []), 'value'));
         $output = "";
 
         foreach ($this->radListData as $id => $feature) {
-            $output .='<span>Hello-'.$id.'</spn>';
-           // $values = $feature;
+             $output .='<span>'.$feature['name'].'</spn>';
+            $values = $feature['rList'];
             $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName . '[' . $id . ']');
-            $output .= $this->getVarValue('type') == 1 ? $activeField->dropDownList($values, ['prompt' => '-']) : $activeField->radioList($values, [
-                'separator' => $this->getCfgValue('separator', "\n")
-            ]);
+            $output .= $activeField->radioList($values, [ 'separator' => $this->getCfgValue('separator', "\n")
+            ])->label(false);
         }
         return $output;
         /* return $activeField->widget(DatePicker::class,[
