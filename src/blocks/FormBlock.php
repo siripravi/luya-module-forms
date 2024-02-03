@@ -5,9 +5,9 @@ namespace siripravi\forms\blocks;
 use Yii;
 use luya\cms\base\PhpBlock;
 use luya\Exception;
-use siripravi\forms\blockgroups\FormGroup;
-use siripravi\forms\Model;
-use siripravi\forms\models\Form;
+use luya\forms\blockgroups\FormGroup;
+use luya\forms\Model;
+use luya\forms\models\Form;
 
 /**
  * Form Block.
@@ -110,7 +110,15 @@ class FormBlock extends PhpBlock
     /**
      * {@inheritDoc}
      */
-
+ /**
+     * Load model data and validate
+     *
+     * @return boolean Whether the model data is loaded and validated
+     */
+    public function isLoadedValidModel()
+    {
+        return Yii::$app->forms->loadModel();
+    }
     public function setup()
     {
         Yii::debug('from block setup invocation', __METHOD__);
@@ -138,7 +146,7 @@ class FormBlock extends PhpBlock
      */
     public function submitAndStore()
     {
-        if ($this->isSubmit()) {
+        if ($this->isSubmit()) {           
             $data = Yii::$app->forms->getFormData();
             Yii::trace('Session Form: ' . print_r($data, true));
             if (!empty($data)) {
@@ -150,7 +158,7 @@ class FormBlock extends PhpBlock
                         $model->trigger(get_class($model)::EVENT_AFTER_VALID, $event);
                     }
                     Yii::$app->forms->cleanup();
-
+                   
                     Yii::$app->session->setFlash('formDataSuccess');
                     Yii::$app->response->redirect($model->redirectUrl);
 
@@ -159,21 +167,13 @@ class FormBlock extends PhpBlock
             }
         }
     }
- /**
-     * Load model data and validate
-     *
-     * @return boolean Whether the model data is loaded and validated
-     */
-    public function isLoadedValidModel()
-    {
-        return Yii::$app->forms->loadModel();
-    }
-    /**
+
+     /**
      * {@inheritDoc}
      *
      * @param {{placeholders.content}}
      * @param {{vars.formId}}
-     */
+    */
     public function admin()
     {
         return;

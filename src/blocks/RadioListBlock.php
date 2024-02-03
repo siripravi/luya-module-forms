@@ -20,10 +20,23 @@ use yii\validators\DateValidator;
  * @author Basil Suter <git@nadar.io>
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
  */
-class RadioListBlockBlock extends PhpBlock
+class RadioListBlock extends PhpBlock
 {
     use FieldBlockTrait {
         config as parentConfig;
+    }
+
+    public $radListData = [];
+
+    public function init()
+    {
+        // Yii::$app->forms->model->
+
+        $this->radListData = [
+            1 =>[
+            1 => 'One', 2 => 'Two', 3 => 'Three'
+            ]
+        ];
     }
 
     /**
@@ -89,18 +102,13 @@ class RadioListBlockBlock extends PhpBlock
 
     public function frontend()
     {
-        
-        Yii::$app->forms->autoConfigureAttribute(
+           print_r($this->radListData); die;
+        \Yii::$app->forms->autoConfigureAttribute(
             $this->getVarValue($this->varAttribute),
             $this->getVarValue($this->varRule, $this->defaultRule),
-            /* [
-                DateValidator::class,
-                ['format' => 'dd-MM-yyyy']
-            ],*/
             $this->getVarValue($this->varIsRequired),
             $this->getVarValue($this->varLabel),
-            $this->getVarValue($this->varHint),
-            $this->getVarValue($this->varFormatAs)
+            $this->getVarValue($this->varHint)
         );
 
         $varName = $this->getVarValue($this->varAttribute);
@@ -108,10 +116,19 @@ class RadioListBlockBlock extends PhpBlock
             return;
         }
 
-         $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName,['options' => ['class'=>'form-outline mb-4 datepicker']]);
+        $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName);
 
-        
-         return $activeField->widget(DatePicker::class,[
+        // $values = ArrayHelper::combine(ArrayHelper::getColumn($this->getVarValue('values', []), 'value'));
+        $output = "";
+
+        foreach ($this->radListData as $id => $feature) {
+            $activeField = Yii::$app->forms->form->field(Yii::$app->forms->model, $varName . '[' . $id . ']');
+            $output .= $this->getVarValue('type') == 1 ? $activeField->dropDownList($values, ['prompt' => '-']) : $activeField->radioList($values, [
+                'separator' => $this->getCfgValue('separator', "\n")
+            ]);
+        }
+        return $output;
+        /* return $activeField->widget(DatePicker::class,[
             'model' => Yii::$app->forms->model,
             'attribute' => $varName,
             'type' => DatePicker::TYPE_COMPONENT_APPEND,
@@ -121,6 +138,6 @@ class RadioListBlockBlock extends PhpBlock
                 'format' => 'mm/dd/yyyy',
                 'autoclose' => true,
             ]
-        ]);
+        ]);*/
     }
 }

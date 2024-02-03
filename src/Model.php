@@ -26,6 +26,10 @@ class Model extends DynamicModel
      */
     public $formatters = [];
 
+    public $FeatureSel = [];
+    public $price = 0; 
+    public $Price = 0;
+    public $Pid, $Delivery, $Message;
     /**
      * Format a given attribute
      *
