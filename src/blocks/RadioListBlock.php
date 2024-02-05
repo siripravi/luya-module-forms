@@ -6,7 +6,7 @@ use luya\cms\base\PhpBlock;
 use siripravi\forms\blockgroups\FormCollectionGroup;
 use siripravi\forms\FieldBlockTrait;
 use luya\helpers\ArrayHelper;
-use kartik\date\DatePicker;
+
 
 use Yii;
 use yii\validators\DateValidator;
@@ -122,16 +122,6 @@ class RadioListBlock extends PhpBlock
             ])->label(false);
         }
         return $output;
-        /* return $activeField->widget(DatePicker::class,[
-            'model' => Yii::$app->forms->model,
-            'attribute' => $varName,
-            'type' => DatePicker::TYPE_COMPONENT_APPEND,
-            'options' => ['placeholder' => 'Enter Delivery date ...'],
-            'pluginOptions' => [
-               // 'orientation' => 'top right',
-                'format' => 'mm/dd/yyyy',
-                'autoclose' => true,
-            ]
-        ]);*/
+        
     }
 }
