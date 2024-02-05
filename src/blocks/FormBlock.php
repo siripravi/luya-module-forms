@@ -5,9 +5,9 @@ namespace siripravi\forms\blocks;
 use Yii;
 use luya\cms\base\PhpBlock;
 use luya\Exception;
-use luya\forms\blockgroups\FormGroup;
-use luya\forms\Model;
-use luya\forms\models\Form;
+use siripravi\forms\blockgroups\FormGroup;
+use siripravi\forms\Model;
+use siripravi\forms\models\Form;
 
 /**
  * Form Block.
