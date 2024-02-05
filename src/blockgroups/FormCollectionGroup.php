@@ -10,14 +10,14 @@ use luya\cms\base\BlockGroup;
  * @author Basil Suter <git@nadar.io>
  * @since 1.0.0
  */
-class FormGroup extends BlockGroup
+class FormCollectionGroup extends BlockGroup
 {
     /**
      * {@inheritDoc}
      */
     public function identifier()
     {
-        return 'forms-group';
+        return 'forms-collection-group';
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace siripravi\forms\blocks;
 
 use luya\cms\base\PhpBlock;
-use siripravi\forms\blockgroups\FormGroup;
+use siripravi\forms\blockgroups\FormCollectionGroup;
 use siripravi\forms\FieldBlockTrait;
 use luya\helpers\ArrayHelper;
 use kartik\date\DatePicker;
@@ -31,7 +31,7 @@ class DatepickerBlock extends PhpBlock
      */
     public function blockGroup()
     {
-        return FormGroup::class;
+        return FormCollectionGroup::class;
     }
 
     /**

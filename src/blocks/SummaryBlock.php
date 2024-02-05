@@ -3,7 +3,7 @@
 namespace siripravi\forms\blocks;
 
 use luya\cms\base\PhpBlock;
-use siripravi\forms\blockgroups\FormGroup;
+use siripravi\forms\blockgroups\FormCollectionGroup;
 use luya\helpers\StringHelper;
 use Yii;
 
@@ -21,7 +21,7 @@ class SummaryBlock extends PhpBlock
 
     public function blockGroup()
     {
-        return FormGroup::class;
+        return FormCollectionGroup::class;
     }
 
     public function config()

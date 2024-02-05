@@ -4,7 +4,7 @@ namespace siripravi\forms\blocks;
 
 use Yii;
 use luya\cms\base\PhpBlock;
-use siripravi\forms\blockgroups\FormGroup;
+use siripravi\forms\blockgroups\FormCollectionGroup;
 use siripravi\forms\FieldBlockTrait;
 use luya\cms\helpers\BlockHelper;
 use kartik\builder\Form;
@@ -26,7 +26,7 @@ class FormWidgetBlock extends PhpBlock
      */
     public function blockGroup()
     {
-        return FormGroup::class;
+        return FormCollectionGroup::class;
     }
     public function config()
     {

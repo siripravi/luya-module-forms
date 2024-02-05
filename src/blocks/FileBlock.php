@@ -5,7 +5,7 @@ namespace siripravi\forms\blocks;
 use luya\admin\validators\StorageUploadValidator;
 use Yii;
 use luya\cms\base\PhpBlock;
-use siripravi\forms\blockgroups\FormGroup;
+use siripravi\forms\blockgroups\FormCollectionGroup;
 use siripravi\forms\FieldBlockTrait;
 
 /**
@@ -23,7 +23,7 @@ class FileBlock extends PhpBlock
      */
     public function blockGroup()
     {
-        return FormGroup::class;
+        return FormCollectionGroup::class;
     }
 
     /**
