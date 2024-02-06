@@ -1,6 +1,6 @@
 # Forms Module
 
-File has been created with `module/create` command. 
+File has been created with `module/create` command.
 
 ## Installation
 
@@ -12,9 +12,9 @@ return [
         // ...
         'forms' => [
             'class' => 'luya\forms\Module',
-            'useAppViewPath' => true, 
+            'useAppViewPath' => true,
         ],
-        
+
         // ...
     ],
     'components' => [
